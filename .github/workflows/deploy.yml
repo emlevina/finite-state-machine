@@ -1,0 +1,36 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+
+      - name: Install Dependencies for kate-state
+        run: cd kate-state && npm ci
+
+      - name: Build kate-state
+        run: cd kate-state && npm run build
+
+      - name: Install Dependencies for sample-app
+        run: cd sample-app && npm ci
+
+      - name: Build sample-app
+        run: cd sample-app && npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./sample-app/build
