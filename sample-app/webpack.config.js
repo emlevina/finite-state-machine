@@ -1,8 +1,9 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  mode: "development", // TODO: add env variable to switch between development and production
+  mode: process.env.NODE_ENV || "development",
   entry: "./src/index.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -22,7 +23,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
+      template: path.resolve(__dirname, "public/index.html"),
+    }),
+    new CopyPlugin({
+      patterns: [{ from: "public", to: "static" }],
     }),
   ],
   devServer: {

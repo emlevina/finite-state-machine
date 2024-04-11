@@ -1,3 +1,1 @@
-export const test = () => {
-  console.log("test");
-};
+export { default as createMachine } from "./createMachine";
