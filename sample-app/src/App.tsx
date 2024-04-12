@@ -1,14 +1,16 @@
+import Button from "./components/Button";
 import { FetchMachineEvents, fetchMachine } from "./machines/fetchMachine";
 import {
   LightSwitchEvents,
   lightSwitchMachine,
 } from "./machines/lightSwitchMachine";
-import Button from "./components/Button";
+import { useGetNumberQuery } from "./services/number";
 
 export default function App() {
   const { send } = lightSwitchMachine;
   const { send: sendFetch } = fetchMachine;
-
+  const { data } = useGetNumberQuery("42");
+  console.log(data);
   return (
     <div className="app">
       <Button
