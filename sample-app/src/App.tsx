@@ -4,6 +4,7 @@ import FactInput from "./components/FactInput";
 import { FetchMachineEvents, fetchMachine } from "./machines/fetchMachine";
 import Button from "./ui-components/Button";
 import Container from "./ui-components/Container";
+import Stack from "./ui-components/Stack";
 
 export default function App() {
   const [userNumber, setUserNumber] = useState("");
@@ -12,7 +13,7 @@ export default function App() {
 
   return (
     <Container>
-      <div style={{ display: "flex", gap: 20 }}>
+      <Stack gap={2}>
         <FactInput setUserNumber={setUserNumber} />
         {currentState === "success" && <Fact number={userNumber} />}
         {currentState === "idle" && <div>Empty</div>}
@@ -21,7 +22,7 @@ export default function App() {
           text="I am a smaller button fetching data"
           variant="contained"
         />
-      </div>
+      </Stack>
     </Container>
   );
 }
