@@ -34,6 +34,11 @@ const config = {
       patterns: [{ from: "public", to: "static" }],
     }),
     new Dotenv(),
+    new webpack.DefinePlugin({
+      "process.env.REACT_APP_RAPID_API_KEY": JSON.stringify(
+        process.env.REACT_APP_RAPID_API_KEY
+      ),
+    }),
   ],
   devServer: {
     static: {
