@@ -15,6 +15,9 @@ export default function createMachine(config: MachineConfig): Machine {
 
   return {
     states,
+    get currentState() {
+      return currentState;
+    },
     send: transitionToState,
   };
 }

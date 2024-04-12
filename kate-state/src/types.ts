@@ -21,4 +21,5 @@ export interface Machine {
     [state: string]: StateConfig;
   };
   send: (event: TransitionEvent) => void;
+  currentState: string;
 }
