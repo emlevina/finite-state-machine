@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const dotenv = require("dotenv");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 dotenv.config();
 
@@ -25,6 +26,26 @@ const config = {
         exclude: /node_modules/,
         use: ["babel-loader"],
       },
+      {
+        test: /\.module\.css$/i,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-modules-typescript-loader" }, // to generate a .d.ts module next to the .scss file (also requires a declaration.d.ts with "declare modules '*.scss';" in it to tell TypeScript that "import styles from './styles.scss';" means to load the module "./styles.scss.d.td")
+
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              esModule: false, // Add this line
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-modules-typescript-loader", "css-loader"],
+        exclude: /\.module\.css$/,
+      },
     ],
   },
   plugins: [
@@ -40,6 +61,10 @@ const config = {
         process.env.REACT_APP_RAPID_API_KEY
       ),
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+    }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+      chunkFilename: "[id].css",
     }),
   ],
   devServer: {
