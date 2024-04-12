@@ -31,7 +31,9 @@ module.exports = {
       patterns: [{ from: "public", to: "static" }],
     }),
     new CopyPlugin({
-      patterns: [{ from: "public/mockServiceWorker.js", to: "" }],
+      patterns: [
+        { from: "public/mockServiceWorker.js", to: "mockServiceWorker.js" },
+      ],
     }),
     new Dotenv(),
   ],
