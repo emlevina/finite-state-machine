@@ -13,5 +13,5 @@ export default {
       format: "esm",
     },
   ],
-  plugins: [typescript(), resolve()],
+  plugins: [typescript({ tsconfig: "./tsconfig-build.json" }), resolve()],
 };
