@@ -18,10 +18,8 @@ const config = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
-    resolve: {
-      alias: {
-        src: path.resolve(__dirname, "src/"),
-      },
+    alias: {
+      src: path.resolve(__dirname, "src/"),
     },
   },
   module: {
