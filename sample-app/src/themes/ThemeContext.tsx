@@ -20,6 +20,10 @@ export const ThemeProvider = ({ children }: React.PropsWithChildren) => {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
+    const themeColor = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue("--background-color");
+    document.body.style.backgroundColor = themeColor;
   }, [theme]);
 
   const toggleTheme = () => {

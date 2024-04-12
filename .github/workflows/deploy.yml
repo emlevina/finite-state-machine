@@ -10,7 +10,6 @@ jobs:
 
     env:
       NODE_ENV: development
-      REACT_APP_RAPID_API_KEY: ${{ secrets.REACT_APP_RAPID_API_KEY }}
 
     steps:
       - name: Checkout
@@ -34,7 +33,9 @@ jobs:
         run: cd sample-app && npm ci
 
       - name: Set NODE_ENV to production
-        run: echo "NODE_ENV=production" >> $GITHUB_ENV
+        run: |
+          echo "NODE_ENV=production" >> $GITHUB_ENV
+          echo "REACT_APP_RAPID_API_KEY=${{ secrets.REACT_APP_RAPID_API_KEY }}" >> $GITHUB_ENV
 
       - name: Build sample-app
         run: cd sample-app && npm run build
