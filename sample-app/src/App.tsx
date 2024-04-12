@@ -8,6 +8,7 @@ import Container from "./ui-components/Container";
 export default function App() {
   const [userNumber, setUserNumber] = useState("");
   const { send, currentState } = fetchMachine;
+  console.log(process.env.REACT_APP_RAPID_API_KEY);
 
   return (
     <Container>
