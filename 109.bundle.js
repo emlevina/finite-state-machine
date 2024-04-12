@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunksample_app=self.webpackChunksample_app||[]).push([[109],{109:(e,p,s)=>{s.d(p,{worker:()=>c});var a=s(684),r=s(383),t=s(692);const n=[r.L.get("https://numbersapi.p.rapidapi.com/:number/trivia",(({params:e})=>{const{number:p}=e;return t.c.text("Mocked response: "+p)}))],c=(0,a.k)(...n)}}]);
