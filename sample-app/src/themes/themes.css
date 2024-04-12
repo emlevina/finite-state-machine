@@ -21,5 +21,9 @@ html {
 
 [data-theme="light"] {
   --background-color: #ffffff;
-  --text-color: #000000;
+  --text-color: hsla(0, 0%, 7%, 0.9);
+  --text-color-secondary: hsla(0, 0%, 7%, 0.7);
+  --button-hover: hsla(0, 0%, 7%, 0.1);
+  --button-contained-hover: hsla(0, 0%, 7%, 0.815);
+  --border-color: hsla(0, 0%, 0%, 0.14);
 }
