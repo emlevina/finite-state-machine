@@ -22,13 +22,17 @@ jobs:
           node-version: "18"
 
       - name: Install Dependencies for kate-state
-        run: cd kate-state && npm ci
+        run: |
+          export NODE_ENV=development
+          cd kate-state && npm ci
 
       - name: Run tests kate-state
         run: cd kate-state && npm run test
 
       - name: Build kate-state
-        run: cd kate-state && npm run build
+        run: |
+          export NODE_ENV=production
+          cd kate-state && npm run build
 
       - name: Install Dependencies for sample-app
         run: cd sample-app && npm ci
