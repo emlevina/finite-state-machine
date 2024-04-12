@@ -4,7 +4,7 @@ import App from "./App";
 import { store } from "./store";
 import { ThemeProvider } from "./themes/ThemeContext";
 import "normalize.css";
-import "./themes/themes.css";
+import "./themes/themes.scss";
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== "development") {
