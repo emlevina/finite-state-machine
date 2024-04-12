@@ -4,7 +4,7 @@ import App from "./App";
 import { store } from "./store";
 
 async function enableMocking() {
-  if (process.env.NODE_ENV !== "development") {
+  if (process.env.REACT_APP_NODE_ENV !== "development") {
     return;
   }
 
