@@ -39,6 +39,7 @@ const config = {
       "process.env.REACT_APP_RAPID_API_KEY": JSON.stringify(
         process.env.REACT_APP_RAPID_API_KEY
       ),
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
     }),
   ],
   devServer: {
