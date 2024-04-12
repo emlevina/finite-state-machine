@@ -3,10 +3,8 @@ import { Provider } from "react-redux";
 import App from "./App";
 import { store } from "./store";
 import { ThemeProvider } from "./themes/ThemeContext";
+import "normalize.css";
 import "./themes/themes.css";
-
-console.log(process.env.NODE_ENV);
-console.log(process.env.REACT_APP_RAPID_API_KEY);
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== "development") {
