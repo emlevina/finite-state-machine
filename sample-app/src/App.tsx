@@ -1,4 +1,5 @@
 import Button from "./components/Button";
+import Container from "./components/Container";
 import { FetchMachineEvents, fetchMachine } from "./machines/fetchMachine";
 import {
   LightSwitchEvents,
@@ -12,7 +13,7 @@ export default function App() {
   const { data } = useGetNumberQuery("42");
   console.log(data);
   return (
-    <div className="app">
+    <Container>
       <Button
         handleClick={() => send(LightSwitchEvents.SWITCH)}
         text="I am a big nice button switching colors in console"
@@ -21,6 +22,6 @@ export default function App() {
         handleClick={() => sendFetch(FetchMachineEvents.FETCH)}
         text="I am a smaller button fetching data"
       />
-    </div>
+    </Container>
   );
 }
