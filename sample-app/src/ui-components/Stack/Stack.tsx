@@ -8,14 +8,14 @@ type Props = {
 export default function Stack({
   children,
   gap,
-  direction,
+  direction = "column",
 }: React.PropsWithChildren<Props>) {
   return (
     <div
       className={styles.stack}
       style={{
         ...(gap && { gap: `${gap}rem` }),
-        flexDirection: direction === "column" ? "column" : "row",
+        flexDirection: direction,
       }}
     >
       {children}

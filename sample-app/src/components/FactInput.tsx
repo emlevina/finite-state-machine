@@ -17,7 +17,7 @@ export default function FactInput({ setUserNumber }: Props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Stack>
+      <Stack direction="row">
         <Input
           value={input}
           onChange={(e) => setInput(e.target.value)}

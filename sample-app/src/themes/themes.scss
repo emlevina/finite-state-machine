@@ -1,13 +1,13 @@
-/* TODO: Change to SCSS */
-
 *,
 *::before,
 *::after {
+  transition: color 0.5s ease, background-color 0.5s ease;
   box-sizing: border-box;
 }
 
 html {
   font-family: "Public Sans", sans-serif;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 [data-theme="dark"] {
@@ -26,4 +26,8 @@ html {
   --button-hover: hsla(0, 0%, 7%, 0.1);
   --button-contained-hover: hsla(0, 0%, 7%, 0.815);
   --border-color: hsla(0, 0%, 0%, 0.14);
+}
+
+p {
+  color: var(--text-color);
 }
