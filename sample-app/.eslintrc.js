@@ -13,13 +13,13 @@ module.exports = {
   },
   rules: {
     "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
     eqeqeq: "error",
     "no-trailing-spaces": "warn",
     "no-console": "warn",
     "import/order": [
       "error",
       {
-        "newlines-between": "always", // new line between groups
         groups: [
           "builtin",
           "external",
