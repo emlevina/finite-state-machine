@@ -1,6 +1,22 @@
+/* TODO: Change to SCSS */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Public Sans", sans-serif;
+}
+
 [data-theme="dark"] {
   --background-color: #000000;
-  --text-color: #ffffff;
+  --text-color: hsla(0, 0%, 93%, 0.9);
+  --text-color-secondary: hsla(0, 0%, 93%, 0.7);
+  --button-hover: hsla(0, 0%, 93%, 0.1);
+  --button-contained-hover: hsla(0, 0%, 93%, 0.815);
+  --border-color: hsla(0, 0%, 100%, 0.14);
 }
 
 [data-theme="light"] {

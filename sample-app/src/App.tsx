@@ -1,27 +1,26 @@
-import Button from "./components/Button";
-import Container from "./components/Container";
+import { useState } from "react";
+import Fact from "./components/Fact";
+import FactInput from "./components/FactInput";
 import { FetchMachineEvents, fetchMachine } from "./machines/fetchMachine";
-import {
-  LightSwitchEvents,
-  lightSwitchMachine,
-} from "./machines/lightSwitchMachine";
-import { useGetNumberQuery } from "./services/number";
+import Button from "./ui-components/Button";
+import Container from "./ui-components/Container";
 
 export default function App() {
-  const { send } = lightSwitchMachine;
-  const { send: sendFetch } = fetchMachine;
-  const { data } = useGetNumberQuery("42");
-  console.log(data);
+  const [userNumber, setUserNumber] = useState("");
+  const { send, currentState } = fetchMachine;
+
   return (
     <Container>
-      <Button
-        handleClick={() => send(LightSwitchEvents.SWITCH)}
-        text="I am a big nice button switching colors in console"
-      />
-      <Button
-        handleClick={() => sendFetch(FetchMachineEvents.FETCH)}
-        text="I am a smaller button fetching data"
-      />
+      <div style={{ display: "flex", gap: 20 }}>
+        <FactInput setUserNumber={setUserNumber} />
+        {currentState === "success" && <Fact number={userNumber} />}
+        {currentState === "idle" && <div>Empty</div>}
+        <Button
+          handleClick={() => send(FetchMachineEvents.FETCH)}
+          text="I am a smaller button fetching data"
+          variant="contained"
+        />
+      </div>
     </Container>
   );
 }

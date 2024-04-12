@@ -1,0 +1,32 @@
+@import 'src/themes/_variables.scss';
+
+.button {
+    color: var(--text-color);
+    height: $height;
+    padding: $padding;
+    border-radius: $border-radius;
+    font-weight: 300;
+    cursor: pointer;
+    border: none;
+}
+
+.buttonContained {
+    @extend .button;
+    background-color: var(--text-color);
+    color: var(--background-color);
+
+    &:hover {
+        background-color: var(--button-contained-hover);
+    }
+}
+
+.buttonOutlined {
+    @extend .button;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+
+    &:hover {
+        background-color: var(--button-hover);
+    }
+}

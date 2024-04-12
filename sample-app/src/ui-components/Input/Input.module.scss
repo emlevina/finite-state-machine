@@ -1,0 +1,16 @@
+@import 'src/themes/_variables.scss';
+
+.input {
+    color: var(--text-color);
+    height: $height;
+    padding: $padding;
+    border-radius: $border-radius;
+    font-weight: 300;
+    border: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    outline: none;
+
+    &:focus {
+        border-color: var(--button-contained-hover);
+    }
+}
