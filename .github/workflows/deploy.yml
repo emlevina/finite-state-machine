@@ -33,11 +33,11 @@ jobs:
       - name: Install Dependencies for sample-app
         run: cd sample-app && npm ci
 
-      - name: Build sample-app
-        run: cd sample-app && npm run build
-
       - name: Set NODE_ENV to production
         run: echo "NODE_ENV=production" >> $GITHUB_ENV
+
+      - name: Build sample-app
+        run: cd sample-app && npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
