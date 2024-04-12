@@ -41,6 +41,8 @@
     "html-webpack-plugin": "^5.6.0",
     "mini-css-extract-plugin": "^2.8.1",
     "msw": "^2.2.13",
+    "sass": "^1.75.0",
+    "sass-loader": "^14.2.0",
     "style-loader": "^4.0.0",
     "typescript": "^5.4.5",
     "typescript-plugin-css-modules": "^5.1.0",

@@ -28,23 +28,38 @@ const config = {
       },
       {
         test: /\.module\.css$/i,
+        exclude: /\.scss$/,
         use: [
           { loader: "style-loader" },
-          { loader: "css-modules-typescript-loader" }, // to generate a .d.ts module next to the .scss file (also requires a declaration.d.ts with "declare modules '*.scss';" in it to tell TypeScript that "import styles from './styles.scss';" means to load the module "./styles.scss.d.td")
-
+          { loader: "css-modules-typescript-loader" },
           {
             loader: "css-loader",
             options: {
               modules: true,
-              esModule: false, // Add this line
+              esModule: false,
             },
           },
         ],
       },
       {
         test: /\.css$/,
+        exclude: [/\.module\.css$/, /\.scss$/],
         use: ["style-loader", "css-modules-typescript-loader", "css-loader"],
-        exclude: /\.module\.css$/,
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-modules-typescript-loader" },
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+              esModule: false,
+            },
+          },
+          { loader: "sass-loader" },
+        ],
       },
     ],
   },
@@ -71,6 +86,7 @@ const config = {
     static: {
       directory: path.join(__dirname, "dist"),
     },
+    watchFiles: ["src/**/*.css"],
     compress: true,
     port: 9000,
   },
