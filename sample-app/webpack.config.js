@@ -3,9 +3,12 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
+const dotenv = require("dotenv");
 
-module.exports = {
-  mode: process.env.NODE_ENV || "development",
+dotenv.config();
+
+const config = {
+  mode: process.env.NODE_ENV,
   entry: "./src/index.tsx",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -30,11 +33,6 @@ module.exports = {
     new CopyPlugin({
       patterns: [{ from: "public", to: "static" }],
     }),
-    new CopyPlugin({
-      patterns: [
-        { from: "public/mockServiceWorker.js", to: "mockServiceWorker.js" },
-      ],
-    }),
     new Dotenv(),
   ],
   devServer: {
@@ -45,3 +43,15 @@ module.exports = {
     port: 9000,
   },
 };
+
+if (process.env.NODE_ENV === "development") {
+  config.plugins.push(
+    new CopyPlugin({
+      patterns: [
+        { from: "public/mockServiceWorker.js", to: "mockServiceWorker.js" },
+      ],
+    })
+  );
+}
+
+module.exports = config;
