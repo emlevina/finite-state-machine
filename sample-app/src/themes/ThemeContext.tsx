@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useLayoutEffect, useState } from "react";
 
 enum Theme {
   Dark = "dark",
@@ -6,24 +6,24 @@ enum Theme {
 }
 
 const ThemeContext = createContext({
-  theme: Theme.Light,
+  theme: Theme.Dark,
   toggleTheme: () => {},
 });
 
 export const ThemeProvider = ({ children }: React.PropsWithChildren) => {
-  const prefersDarkTheme = window.matchMedia(
-    "(prefers-color-scheme: dark)"
-  ).matches;
+  const prefersDarkTheme = window.localStorage.getItem("theme") === Theme.Dark;
+
   const [theme, setTheme] = useState<Theme>(
     prefersDarkTheme ? Theme.Dark : Theme.Light
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     const themeColor = getComputedStyle(
       document.documentElement
     ).getPropertyValue("--background-color");
     document.body.style.backgroundColor = themeColor;
+    window.localStorage.setItem("theme", theme);
   }, [theme]);
 
   const toggleTheme = () => {
