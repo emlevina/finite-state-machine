@@ -9,6 +9,7 @@ export default function ChosenNumber({ number }: Props) {
         color: "var(--accent-color)",
         fontSize: "4rem",
         fontWeight: 900,
+        textAlign: "center",
       }}
     >
       {number}
