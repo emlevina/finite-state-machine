@@ -1,27 +1,39 @@
-import { useState } from "react";
-import Fact from "./components/Fact";
-import FactInput from "./components/FactInput";
-import { FetchMachineEvents, fetchMachine } from "./machines/fetchMachine";
-import Button from "./ui-components/Button";
+import { useEffect, useState } from "react";
+
+import MainBlock from "./components/MainBlock";
+import Welcome from "./components/Welcome";
+
+import {
+  UserFlowEvent,
+  UserFlowState,
+  userFlowMachine,
+} from "./machines/userFlowMachine";
+
 import Container from "./ui-components/Container";
 import Stack from "./ui-components/Stack";
 
 export default function App() {
-  const [userNumber, setUserNumber] = useState("");
-  const { send, currentState } = fetchMachine;
-  console.log(process.env.REACT_APP_RAPID_API_KEY);
+  const { subscribe, send, initialState } = userFlowMachine;
+  const [currentState, setCurrentState] = useState(initialState);
 
+  useEffect(() => {
+    const unsubscribe = subscribe((newState) => setCurrentState(newState));
+
+    return () => {
+      unsubscribe();
+    };
+  }, [userFlowMachine]);
+
+  console.log(process.env.REACT_APP_RAPID_API_KEY);
   return (
     <Container>
       <Stack gap={2}>
-        <FactInput setUserNumber={setUserNumber} />
-        {currentState === "success" && <Fact number={userNumber} />}
-        {currentState === "idle" && <div>Empty</div>}
-        <Button
-          handleClick={() => send(FetchMachineEvents.FETCH)}
-          text="I am a smaller button fetching data"
-          variant="contained"
-        />
+        {currentState === UserFlowState.welcome && (
+          <Welcome
+            transitionToFactInput={() => send(UserFlowEvent.START_CLICK)}
+          />
+        )}
+        {currentState === UserFlowState.mainBlock && <MainBlock />}
       </Stack>
     </Container>
   );

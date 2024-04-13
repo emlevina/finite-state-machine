@@ -16,10 +16,14 @@ export interface MachineConfig {
   };
 }
 
+export type Listener = (currentState: string) => void;
+
 export interface Machine {
   states: {
     [state: string]: StateConfig;
   };
   send: (event: TransitionEvent) => void;
+  initialState: string;
   currentState: string;
+  subscribe: (listener: Listener) => () => void;
 }
