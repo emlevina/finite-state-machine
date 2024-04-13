@@ -16,8 +16,12 @@ html {
   --text-color: hsla(0, 0%, 93%, 0.9);
   --text-color-secondary: hsla(0, 0%, 93%, 0.7);
   --button-hover: hsla(0, 0%, 93%, 0.1);
+  --button-active: hsla(0, 0%, 93%, 0.414);
   --button-contained-hover: hsla(0, 0%, 93%, 0.815);
+  --button-contained-active: hsla(0, 0%, 93%, 0.9);
   --border-color: hsla(0, 0%, 100%, 0.14);
+  --text-color-light: hsla(0, 0%, 93%, 0.7);
+
 }
 
 [data-theme="light"] {
@@ -25,8 +29,11 @@ html {
   --text-color: hsla(0, 0%, 7%, 0.9);
   --text-color-secondary: hsla(0, 0%, 7%, 0.7);
   --button-hover: hsla(0, 0%, 7%, 0.1);
+  --button-active: hsla(0, 0%, 7%, 0.294);
   --button-contained-hover: hsla(0, 0%, 7%, 0.815);
+  --button-contained-active: hsla(0, 0%, 7%, 0.9);
   --border-color: hsla(0, 0%, 0%, 0.14);
+  --text-color-light: hsla(0, 0%, 7%, 0.7);
 }
 
 p {
