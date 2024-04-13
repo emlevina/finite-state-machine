@@ -24,6 +24,7 @@ export default function Button({
   const buttonProps = {
     className,
     type,
+    disabled: buttonState === "disabled" || buttonState === "loading",
     ...(type !== "submit" && { onClick: handleClick }),
   };
 
