@@ -13,7 +13,7 @@ export default function Welcome({ transitionToFactInput }: Props) {
         <Stack gap={1} alignItems="center">
           <h1>Welcome</h1>
           <h5>
-            To the <em>number</em> facts app
+            to the <em>number</em> facts app
           </h5>
         </Stack>
       </Box>

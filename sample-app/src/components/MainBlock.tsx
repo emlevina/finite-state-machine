@@ -46,7 +46,7 @@ export default function MainBlock() {
 
   return (
     <Stack alignItems="center">
-      <Box height={200} width={200}>
+      <Box height={200} width={400}>
         {currentState === FetchMachineStates.idle && (
           <h5>
             Type a <em>number</em> to get a fact about it
