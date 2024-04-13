@@ -1,7 +1,9 @@
+@import 'src/themes/_variables.scss';
+
 .switch {
     position: absolute;
-    inset-inline-start: 20px;
-    inset-block-start: 20px;
+    inset-inline-start: $theme-switch-padding;
+    inset-block-start: $theme-switch-padding;
     cursor: pointer;
 
     .icon {
