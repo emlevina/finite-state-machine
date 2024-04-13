@@ -21,7 +21,9 @@ export default function MainBlock() {
   } = useGetNumberQuery(userNumber, { skip: !userNumber });
 
   useEffect(() => {
-    if (userNumber) {
+    if (userNumber && currentState === FetchMachineStates.error) {
+      send(FetchMachineEvents.RETRY);
+    } else if (userNumber) {
       send(FetchMachineEvents.FETCH);
     }
   }, [userNumber]);
@@ -45,7 +47,7 @@ export default function MainBlock() {
   }, [error]);
 
   return (
-    <Stack alignItems="center">
+    <Stack alignItems={{ mobile: "stretch", tablet: "center" }}>
       <Box height={200} width={400}>
         {currentState === FetchMachineStates.idle && (
           <h5>
@@ -62,7 +64,7 @@ export default function MainBlock() {
         )}
         {currentState === FetchMachineStates.loading && (
           <h5>
-            Loading something <em>hilarious</em> or (not)
+            Loading something <em>hilarious</em> (or not)
           </h5>
         )}
       </Box>

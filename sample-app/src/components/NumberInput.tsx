@@ -39,7 +39,13 @@ export default function NumberInput({ setUserNumber, currentState }: Props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Stack direction="row" wrap>
+      <Stack
+        direction={{ mobile: "column", tablet: "row" }}
+        alignItems={{
+          mobile: "stretch",
+          tablet: "start",
+        }}
+      >
         <Input
           value={input}
           onChange={handleChange}

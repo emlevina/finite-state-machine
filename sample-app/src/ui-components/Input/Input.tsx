@@ -10,12 +10,18 @@ type Props = {
 
 export default function Input({ type, value, onChange, helperText }: Props) {
   return (
-    <Stack>
+    <Stack
+      direction={{
+        mobile: "column-reverse",
+        tablet: "column",
+      }}
+    >
       <input
         type={type}
         value={value}
         onChange={onChange}
         className={styles.input}
+        width="100%"
       />
       <p className={styles.helperText}>{helperText || " "}</p>
     </Stack>
