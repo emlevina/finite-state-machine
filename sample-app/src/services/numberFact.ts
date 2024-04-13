@@ -2,8 +2,8 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const apiKey = process.env.REACT_APP_RAPID_API_KEY!;
 
-export const numberApi = createApi({
-  reducerPath: "numberApi",
+export const numberFactApi = createApi({
+  reducerPath: "numberFactApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://numbersapi.p.rapidapi.com",
     prepareHeaders: (headers) => {
@@ -22,4 +22,4 @@ export const numberApi = createApi({
   }),
 });
 
-export const { useGetNumberQuery } = numberApi;
+export const { useGetNumberQuery } = numberFactApi;
