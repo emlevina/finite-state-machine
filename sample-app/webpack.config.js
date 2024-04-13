@@ -52,12 +52,17 @@ const config = {
       {
         test: /\.scss$/,
         use: [
-          { loader: "style-loader" },
+          process.env.NODE_ENV !== "production"
+            ? "style-loader"
+            : MiniCssExtractPlugin.loader,
+
           { loader: "css-modules-typescript-loader" },
           {
             loader: "css-loader",
             options: {
-              modules: true,
+              modules: {
+                localIdentName: "[name]__[local]___[hash:base64:5]",
+              },
               esModule: false,
             },
           },
