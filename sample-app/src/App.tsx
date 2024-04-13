@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-
 import MainBlock from "./components/MainBlock";
 import Welcome from "./components/Welcome";
 
+import { useMachine } from "./hooks/useMachine";
 import {
   UserFlowEvent,
   UserFlowState,
@@ -13,16 +12,7 @@ import Container from "./ui-components/Container";
 import Stack from "./ui-components/Stack";
 
 export default function App() {
-  const { subscribe, send, initialState } = userFlowMachine;
-  const [currentState, setCurrentState] = useState(initialState);
-
-  useEffect(() => {
-    const unsubscribe = subscribe((newState) => setCurrentState(newState));
-
-    return () => {
-      unsubscribe();
-    };
-  }, [userFlowMachine]);
+  const { send, currentState } = useMachine(userFlowMachine);
 
   return (
     <Container>

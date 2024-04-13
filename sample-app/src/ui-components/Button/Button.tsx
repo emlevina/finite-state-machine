@@ -1,10 +1,11 @@
 import styles from "./Button.module.scss";
 
 type Props = {
-  handleClick: () => void;
+  handleClick?: () => void;
   text: string;
   variant?: "contained" | "outlined";
   type?: "button" | "submit" | "reset";
+  buttonState?: "active" | "loading" | "disabled";
 };
 
 export default function Button({
@@ -12,13 +13,26 @@ export default function Button({
   text,
   variant = "outlined",
   type = "button",
+  buttonState = "active",
 }: Props) {
-  const className =
-    variant === "contained" ? styles.buttonContained : styles.buttonOutlined;
+  const className = [
+    variant === "contained" ? styles.buttonContained : styles.buttonOutlined,
+    (buttonState === "disabled" || buttonState === "loading") &&
+      styles.disabled,
+  ].join(" ");
+
+  const buttonProps = {
+    className,
+    type,
+    ...(type !== "submit" && { onClick: handleClick }),
+  };
 
   return (
-    <button onClick={handleClick} className={className} type={type}>
-      {text}
+    <button {...buttonProps}>
+      {(buttonState === "active" || buttonState === "disabled") && (
+        <span>{text}</span>
+      )}
+      {buttonState === "loading" && <div className={styles.loading} />}
     </button>
   );
 }
