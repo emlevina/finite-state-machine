@@ -1,4 +1,4 @@
-import { useThemeContext } from "../../themes/useThemeContext";
+import { useThemeContext } from "../../hooks/useThemeContext";
 import styles from "./ThemeSwitch.module.scss";
 
 export default function ThemeSwitch() {
