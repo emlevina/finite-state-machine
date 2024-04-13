@@ -2,7 +2,7 @@
 
 import { createMachine } from "kate-state";
 
-enum FetchMachineStates {
+export enum FetchMachineStates {
   idle = "idle",
   loading = "loading",
   error = "error",
@@ -29,28 +29,11 @@ export const fetchMachine = createMachine({
         [FetchMachineEvents.RESOLVE]: FetchMachineStates.success,
         [FetchMachineEvents.REJECT]: FetchMachineStates.error,
       },
-      onEntry: () => {
-        fetch("https://jsonplaceholder.typicode.com/todos/1")
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Error");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            console.log(data);
-            fetchMachine.send(FetchMachineEvents.RESOLVE);
-          })
-          .catch(() => fetchMachine.send(FetchMachineEvents.REJECT));
-      },
     },
 
     [FetchMachineStates.success]: {
       on: {
         [FetchMachineEvents.FETCH]: FetchMachineStates.loading,
-      },
-      onEntry: () => {
-        console.log("success");
       },
     },
     [FetchMachineStates.error]: {

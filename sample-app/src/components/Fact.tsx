@@ -1,15 +1,15 @@
-import { useGetNumberQuery } from "../services/number";
+import Stack from "../ui-components/Stack";
 
 type Props = {
   number: string;
+  fact: string;
 };
 
-export default function Fact({ number }: Props) {
-  const { data } = useGetNumberQuery(number);
-
+export default function Fact({ number, fact }: Props) {
   return (
-    <div>
-      <p>{data}</p>
-    </div>
+    <Stack direction="row">
+      <p>{fact}</p>
+      <p>{number}</p>
+    </Stack>
   );
 }
