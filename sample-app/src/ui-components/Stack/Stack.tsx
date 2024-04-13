@@ -1,30 +1,43 @@
+import { useResponsive } from "../../hooks/useResponsive";
+import {
+  AlignItems,
+  Direction,
+  Gap,
+  ResponsiveProp,
+} from "../../types/uiProps";
+import { getValueForDevice } from "../../utils/getValueForDevice";
 import styles from "./Stack.module.scss";
 
 interface Props {
   /**
    * Gap between elements, in rem
    */
-  gap?: number;
-  direction?: "row" | "column";
-  alignItems?: "center" | "start" | "end" | "stretch";
+  gap?: ResponsiveProp<Gap>;
+  direction?: ResponsiveProp<Direction>;
+  alignItems?: ResponsiveProp<AlignItems>;
   wrap?: boolean;
 }
 
 export default function Stack({
   children,
   gap,
-  direction = "column",
-  alignItems = "stretch",
+  direction,
+  alignItems,
   wrap = false,
 }: React.PropsWithChildren<Props>) {
+  const { device } = useResponsive();
+  const gapValue = getValueForDevice<Gap>(device, gap);
+  const directionValue = getValueForDevice<Direction>(device, direction);
+  const alignItemsValue = getValueForDevice<AlignItems>(device, alignItems);
+
   return (
     <div
       className={styles.stack}
       style={{
-        ...(gap && { gap: `${gap}rem` }),
+        ...(gapValue && { gap: `${gapValue}rem` }),
         ...(wrap && { flexWrap: "wrap" }),
-        flexDirection: direction,
-        alignItems,
+        flexDirection: directionValue ?? "column",
+        alignItems: alignItemsValue ?? "stretch",
       }}
     >
       {children}

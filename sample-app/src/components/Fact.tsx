@@ -9,7 +9,13 @@ type Props = {
 
 export default function Fact({ number, fact }: Props) {
   return (
-    <Stack direction="row" alignItems="center" wrap>
+    <Stack
+      direction={{
+        mobile: "column",
+        tablet: "row",
+      }}
+      alignItems="center"
+    >
       <Box width={250}>
         <h5>{fact}</h5>
       </Box>
