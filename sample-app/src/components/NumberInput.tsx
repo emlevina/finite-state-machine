@@ -39,7 +39,7 @@ export default function NumberInput({ setUserNumber, currentState }: Props) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Stack direction="row">
+      <Stack direction="row" wrap>
         <Input
           value={input}
           onChange={handleChange}

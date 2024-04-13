@@ -9,7 +9,7 @@ type Props = {
 
 export default function Fact({ number, fact }: Props) {
   return (
-    <Stack direction="row" alignItems="center">
+    <Stack direction="row" alignItems="center" wrap>
       <Box width={250}>
         <h5>{fact}</h5>
       </Box>

@@ -7,6 +7,7 @@ interface Props {
   gap?: number;
   direction?: "row" | "column";
   alignItems?: "center" | "start" | "end" | "stretch";
+  wrap?: boolean;
 }
 
 export default function Stack({
@@ -14,12 +15,14 @@ export default function Stack({
   gap,
   direction = "column",
   alignItems = "stretch",
+  wrap = false,
 }: React.PropsWithChildren<Props>) {
   return (
     <div
       className={styles.stack}
       style={{
         ...(gap && { gap: `${gap}rem` }),
+        ...(wrap && { flexWrap: "wrap" }),
         flexDirection: direction,
         alignItems,
       }}

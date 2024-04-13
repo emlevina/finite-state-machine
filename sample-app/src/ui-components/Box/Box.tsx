@@ -11,7 +11,7 @@ export default function Box({
   width = "auto",
 }: React.PropsWithChildren<Props>) {
   return (
-    <div className={styles.box} style={{ height, width }}>
+    <div className={styles.box} style={{ height, maxWidth: width }}>
       {children}
     </div>
   );
