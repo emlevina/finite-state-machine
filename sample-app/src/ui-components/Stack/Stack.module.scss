@@ -1,5 +1,7 @@
+@import 'src/themes/_variables.scss';
+
 .stack {
     display: flex;
-    gap: 1rem;
+    gap: $stack-gap-default;
     justify-content: center;
 }

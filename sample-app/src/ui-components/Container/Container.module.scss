@@ -1,13 +1,16 @@
-$padding: 20px;
+@import 'src/themes/_variables.scss';
 
 .container {
   background: var(--background-color);
-  padding: $padding;
+  padding: $container-padding;
   width: 100%;
+  margin: 0 auto;
+  max-width: 1280px;
   min-height: 100vh;
   min-height: 100dvh; // Unit for dynamic viewport height, for mobile
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  position: relative;
 }

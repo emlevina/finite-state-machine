@@ -2,9 +2,9 @@
 
 .input {
     color: var(--text-color);
-    height: $height;
-    padding: $padding;
-    border-radius: $border-radius;
+    height: $input-height;
+    padding: $input-padding;
+    border-radius: $input-border-radius;
     font-weight: 300;
     border: 1px solid var(--border-color);
     background-color: var(--background-color);
