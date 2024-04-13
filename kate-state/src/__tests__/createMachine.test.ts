@@ -65,4 +65,6 @@ describe("createMachine", () => {
     machine.send("event1");
     expect(machine.currentState).toBe("state1");
   });
+
+  // TODO: add tests for subscribe method
 });
