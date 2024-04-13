@@ -24,7 +24,6 @@ export default function App() {
     };
   }, [userFlowMachine]);
 
-  console.log(process.env.REACT_APP_RAPID_API_KEY);
   return (
     <Container>
       <Stack gap={2}>
