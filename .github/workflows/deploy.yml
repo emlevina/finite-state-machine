@@ -8,6 +8,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    environment:
+      name: production
+
     env:
       NODE_ENV: development
 
@@ -45,5 +48,3 @@ jobs:
         with:
           github_token: ${{ secrets.GH_PAGES_PAT }}
           publish_dir: ./sample-app/dist
-    deployment:
-      environment: production
