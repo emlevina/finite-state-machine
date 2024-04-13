@@ -1,5 +1,3 @@
-// TODO: Check if used and delete if not
-
 import { createMachine } from "kate-state";
 
 export enum FetchMachineStates {

@@ -4,6 +4,9 @@ interface CssExports {
   'button': string;
   'buttonContained': string;
   'buttonOutlined': string;
+  'circle': string;
+  'disabled': string;
+  'loading': string;
 }
 export const cssExports: CssExports;
 export default cssExports;

@@ -7,6 +7,7 @@ import {
 } from "../machines/fetchMachine";
 import { useGetNumberQuery } from "../services/numberFact";
 import Box from "../ui-components/Box";
+import Stack from "../ui-components/Stack";
 import Fact from "./Fact";
 import NumberInput from "./NumberInput";
 
@@ -20,16 +21,22 @@ export default function MainBlock() {
   } = useGetNumberQuery(userNumber, { skip: !userNumber });
 
   useEffect(() => {
-    if (isLoading) {
+    if (userNumber) {
       send(FetchMachineEvents.FETCH);
     }
-  }, [isLoading]);
+  }, [userNumber]);
 
   useEffect(() => {
-    if (factAboutNumber) {
-      send(FetchMachineEvents.RESOLVE);
+    if (
+      factAboutNumber &&
+      currentState === FetchMachineStates.loading &&
+      !isLoading
+    ) {
+      new Promise((resolve) => setTimeout(resolve, 5000)).then(() =>
+        send(FetchMachineEvents.RESOLVE)
+      );
     }
-  }, [factAboutNumber]);
+  }, [factAboutNumber, currentState, isLoading]);
 
   useEffect(() => {
     if (error) {
@@ -38,18 +45,28 @@ export default function MainBlock() {
   }, [error]);
 
   return (
-    <>
-      <Box height={200}>
+    <Stack alignItems="center">
+      <Box height={200} width={200}>
         {currentState === FetchMachineStates.idle && (
-          <div>Are you thinking?</div>
+          <h5>
+            Type a <em>number</em> to get a fact about it
+          </h5>
         )}
         {currentState === FetchMachineStates.success && (
           <Fact number={userNumber} fact={factAboutNumber} />
         )}
-        {currentState === FetchMachineStates.error && <div>Error</div>}
-        {currentState === FetchMachineStates.loading && <div>Loading</div>}
+        {currentState === FetchMachineStates.error && (
+          <h5 style={{ color: "var(--text-color-error)" }}>
+            Something went <em>wrong</em>
+          </h5>
+        )}
+        {currentState === FetchMachineStates.loading && (
+          <h5>
+            Loading something <em>hilarious</em> or (not)
+          </h5>
+        )}
       </Box>
-      <NumberInput setUserNumber={setUserNumber} />
-    </>
+      <NumberInput setUserNumber={setUserNumber} currentState={currentState} />
+    </Stack>
   );
 }

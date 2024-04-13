@@ -1,10 +1,13 @@
 import styles from "./Stack.module.scss";
 
-type Props = {
+interface Props {
+  /**
+   * Gap between elements, in rem
+   */
   gap?: number;
   direction?: "row" | "column";
   alignItems?: "center" | "start" | "end" | "stretch";
-};
+}
 
 export default function Stack({
   children,
