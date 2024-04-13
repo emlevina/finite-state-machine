@@ -35,6 +35,9 @@ jobs:
       - name: Install Dependencies for sample-app
         run: cd sample-app && npm ci
 
+      - name: Run tests sample-app
+        run: cd sample-app && npm run test
+
       - name: Set NODE_ENV to production
         run: |
           echo "NODE_ENV=production" >> $GITHUB_ENV
