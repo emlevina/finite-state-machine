@@ -1,6 +1,7 @@
-const Fact = require("../models/Fact");
+import { Request, Response } from "express";
+import Fact from "../models/Fact";
 
-const createFact = async (req, res) => {
+export const createFact = async (req: Request, res: Response) => {
   try {
     const fact = await Fact.create(req.body);
     res.status(201).json({ fact });
@@ -10,7 +11,7 @@ const createFact = async (req, res) => {
   }
 };
 
-const getFact = async (req, res) => {
+export const getFact = async (req: Request, res: Response) => {
   try {
     const fact = await Fact.findOne({ number: req.params.number });
     const factToSend = fact ? fact.fact : "Fact not found";
@@ -20,5 +21,3 @@ const getFact = async (req, res) => {
     res.status(400).json({ error });
   }
 };
-
-module.exports = { createFact, getFact };

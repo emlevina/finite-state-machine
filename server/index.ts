@@ -1,8 +1,9 @@
-const http = require("http");
-const cors = require("cors");
-const express = require("express");
-const factsRouter = require("./routers/facts");
-const connectDB = require("./db/connect");
+import http from "http";
+import cors from "cors";
+import express from "express";
+import factsRouter from "./routers/facts";
+import connectDB from "./db/connect";
+
 require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3001;
@@ -16,7 +17,7 @@ const server = http.createServer(app);
 
 const start = async () => {
   try {
-    await connectDB(process.env.MONGO_URI);
+    await connectDB(process.env.MONGO_URI!);
     console.log(`Connected to Mongo Cluster`);
     server.listen(port, () => {
       console.log(`Server runs on ${port}`);
