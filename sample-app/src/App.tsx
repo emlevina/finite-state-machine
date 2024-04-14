@@ -25,7 +25,7 @@ export default function App() {
         <MainBlock transitionToGoodbye={() => send(UserFlowEvent.FINISH)} />
       )}
       {currentState === UserFlowState.goodbye && (
-        <Goodbye transitionToWelcomeInput={() => UserFlowEvent.RESTART} />
+        <Goodbye transitionToWelcomeInput={() => send(UserFlowEvent.RESTART)} />
       )}
     </Container>
   );
