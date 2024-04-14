@@ -12,9 +12,7 @@ const createFact = async (req, res) => {
 
 const getFact = async (req, res) => {
   try {
-    console.log(req.params.number);
     const fact = await Fact.findOne({ number: req.params.number });
-    console.log(fact);
     const factToSend = fact ? fact.fact : "Fact not found";
     res.status(201).json({ fact: factToSend });
   } catch (error) {
