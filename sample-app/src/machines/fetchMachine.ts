@@ -10,7 +10,6 @@ export enum FetchMachineEvents {
   FETCH = "FETCH",
   RESOLVE = "RESOLVE",
   REJECT = "REJECT",
-  RETRY = "RETRY",
 }
 
 export const fetchMachine = createMachine({
@@ -33,11 +32,17 @@ export const fetchMachine = createMachine({
       on: {
         [FetchMachineEvents.FETCH]: FetchMachineStates.loading,
       },
+      onEntry: (context, setContext) => {
+        setContext({ successCount: context.successCount + 1 });
+      },
     },
     [FetchMachineStates.error]: {
       on: {
-        [FetchMachineEvents.RETRY]: FetchMachineStates.loading,
+        [FetchMachineEvents.FETCH]: FetchMachineStates.loading,
       },
     },
+  },
+  context: {
+    successCount: 0,
   },
 });

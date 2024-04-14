@@ -5,50 +5,51 @@ import {
   FetchMachineStates,
   fetchMachine,
 } from "../machines/fetchMachine";
-import { useGetNumberQuery } from "../services/numberFact";
+import { getNumber } from "../services/numberFact";
 import Box from "../ui-components/Box";
 import Stack from "../ui-components/Stack";
 import Fact from "./Fact";
 import NumberInput from "./NumberInput";
 
-export default function MainBlock() {
+type Props = {
+  transitionToGoodbye: () => void;
+};
+
+export default function MainBlock({ transitionToGoodbye }: Props) {
+  const [factAboutNumber, setFactAboutNumber] = useState("");
   const [userNumber, setUserNumber] = useState("");
-  const { send, currentState } = useMachine(fetchMachine);
-  const {
-    data: factAboutNumber,
-    error,
-    isLoading,
-  } = useGetNumberQuery(userNumber, { skip: !userNumber });
+  const { send, currentState, currentContext } = useMachine(fetchMachine);
 
-  useEffect(() => {
-    if (userNumber && currentState === FetchMachineStates.error) {
-      send(FetchMachineEvents.RETRY);
-    } else if (userNumber) {
-      send(FetchMachineEvents.FETCH);
-    }
-  }, [userNumber]);
-
-  useEffect(() => {
-    if (
-      factAboutNumber &&
-      currentState === FetchMachineStates.loading &&
-      !isLoading
-    ) {
-      new Promise((resolve) => setTimeout(resolve, 5000)).then(() =>
-        send(FetchMachineEvents.RESOLVE)
-      );
-    }
-  }, [factAboutNumber, currentState, isLoading]);
-
-  useEffect(() => {
-    if (error) {
+  const handleAddNumber = async (number: string) => {
+    setUserNumber(number);
+    send(FetchMachineEvents.FETCH);
+    // Simulate a delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const fact = await getNumber(number);
+      setFactAboutNumber(fact);
+      send(FetchMachineEvents.RESOLVE);
+    } catch (e) {
       send(FetchMachineEvents.REJECT);
     }
-  }, [error]);
+  };
+
+  useEffect(() => {
+    if (currentContext.successCount > 4) {
+      setTimeout(() => {
+        transitionToGoodbye();
+      }, 5000);
+    }
+  }, [currentContext]);
 
   return (
-    <Stack alignItems={{ mobile: "stretch", tablet: "center" }}>
-      <Box height={200} width={400}>
+    <Stack alignItems={{ mobile: "stretch", tablet: "center" }} width={400}>
+      <Box
+        height={{
+          mobile: 200,
+          tablet: 300,
+        }}
+      >
         {currentState === FetchMachineStates.idle && (
           <h5>
             Type a <em>number</em> to get a fact about it
@@ -68,7 +69,10 @@ export default function MainBlock() {
           </h5>
         )}
       </Box>
-      <NumberInput setUserNumber={setUserNumber} currentState={currentState} />
+      <NumberInput
+        handleAddNumber={handleAddNumber}
+        currentState={currentState}
+      />
     </Stack>
   );
 }
