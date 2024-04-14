@@ -1,7 +1,7 @@
 export type TransitionEvent = string;
 
 interface StateConfig<T> {
-  on: {
+  on?: {
     [event in TransitionEvent]?: string;
   };
   onEntry?: (context: T, setContext: (newContext: Partial<T>) => void) => void;
