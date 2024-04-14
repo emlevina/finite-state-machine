@@ -14,7 +14,7 @@ export default function createMachine<T extends object>(
 
   const transitionToState = (event: TransitionEvent) => {
     const stateConfig = states[currentState];
-    if (event in stateConfig.on) {
+    if (stateConfig.on && event in stateConfig.on) {
       stateConfig.onExit?.(currentContext, setContext);
       currentState = stateConfig.on[event]!;
       states[currentState].onEntry?.(currentContext, setContext);
