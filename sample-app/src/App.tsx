@@ -1,3 +1,4 @@
+import Goodbye from "./components/Goodbye";
 import MainBlock from "./components/MainBlock";
 import Welcome from "./components/Welcome";
 
@@ -20,7 +21,12 @@ export default function App() {
           transitionToFactInput={() => send(UserFlowEvent.START_CLICK)}
         />
       )}
-      {currentState === UserFlowState.mainBlock && <MainBlock />}
+      {currentState === UserFlowState.mainBlock && (
+        <MainBlock transitionToGoodbye={() => send(UserFlowEvent.FINISH)} />
+      )}
+      {currentState === UserFlowState.goodbye && (
+        <Goodbye transitionToWelcomeInput={() => UserFlowEvent.RESTART} />
+      )}
     </Container>
   );
 }

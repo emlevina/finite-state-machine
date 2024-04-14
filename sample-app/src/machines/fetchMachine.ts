@@ -32,11 +32,17 @@ export const fetchMachine = createMachine({
       on: {
         [FetchMachineEvents.FETCH]: FetchMachineStates.loading,
       },
+      onEntry: (context, setContext) => {
+        setContext({ successCount: context.successCount + 1 });
+      },
     },
     [FetchMachineStates.error]: {
       on: {
         [FetchMachineEvents.FETCH]: FetchMachineStates.loading,
       },
     },
+  },
+  context: {
+    successCount: 0,
   },
 });

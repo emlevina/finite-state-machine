@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMachine } from "../hooks/useMachine";
 import {
   FetchMachineEvents,
@@ -11,14 +11,20 @@ import Stack from "../ui-components/Stack";
 import Fact from "./Fact";
 import NumberInput from "./NumberInput";
 
-export default function MainBlock() {
+type Props = {
+  transitionToGoodbye: () => void;
+};
+
+export default function MainBlock({ transitionToGoodbye }: Props) {
   const [factAboutNumber, setFactAboutNumber] = useState("");
   const [userNumber, setUserNumber] = useState("");
-  const { send, currentState } = useMachine(fetchMachine);
+  const { send, currentState, currentContext } = useMachine(fetchMachine);
 
   const handleAddNumber = async (number: string) => {
     setUserNumber(number);
     send(FetchMachineEvents.FETCH);
+    // Simulate a delay
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     try {
       const fact = await getNumber(number);
       setFactAboutNumber(fact);
@@ -27,6 +33,14 @@ export default function MainBlock() {
       send(FetchMachineEvents.REJECT);
     }
   };
+
+  useEffect(() => {
+    if (currentContext.successCount > 4) {
+      setTimeout(() => {
+        transitionToGoodbye();
+      }, 5000);
+    }
+  }, [currentContext]);
 
   return (
     <Stack alignItems={{ mobile: "stretch", tablet: "center" }} width={400}>
