@@ -5,7 +5,7 @@ import {
   FetchMachineStates,
   fetchMachine,
 } from "../machines/fetchMachine";
-import { getNumberRapid } from "../services/numberFact";
+import { getNumber } from "../services/numberFact";
 import Box from "../ui-components/Box";
 import Stack from "../ui-components/Stack";
 import Fact from "./Fact";
@@ -16,22 +16,26 @@ export default function MainBlock() {
   const [userNumber, setUserNumber] = useState("");
   const { send, currentState } = useMachine(fetchMachine);
 
-  const handleAddNumber = (number: string) => {
+  const handleAddNumber = async (number: string) => {
     setUserNumber(number);
     send(FetchMachineEvents.FETCH);
-    getNumberRapid(number)
-      .then((fact) => {
-        setFactAboutNumber(fact);
-        send(FetchMachineEvents.RESOLVE);
-      })
-      .catch(() => {
-        send(FetchMachineEvents.REJECT);
-      });
+    try {
+      const fact = await getNumber(number);
+      setFactAboutNumber(fact);
+      send(FetchMachineEvents.RESOLVE);
+    } catch (e) {
+      send(FetchMachineEvents.REJECT);
+    }
   };
 
   return (
     <Stack alignItems={{ mobile: "stretch", tablet: "center" }} width={400}>
-      <Box height={300}>
+      <Box
+        height={{
+          mobile: 200,
+          tablet: 300,
+        }}
+      >
         {currentState === FetchMachineStates.idle && (
           <h5>
             Type a <em>number</em> to get a fact about it
