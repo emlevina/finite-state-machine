@@ -17,7 +17,11 @@ export interface MachineConfig<T extends object> {
   context?: T;
 }
 
-export type Listener<T> = (currentState: string, context: T) => void;
+export type Listener<T> = (
+  currentState: string,
+  context: T,
+  error?: string
+) => void;
 
 export interface Machine<T extends object> {
   states: {

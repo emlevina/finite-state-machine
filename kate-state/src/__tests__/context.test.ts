@@ -48,6 +48,10 @@ describe("machine's context", () => {
     machine = createMachine(config);
   });
 
+  it("should be initialized to { currentSong: '', countStops: 0 }", () => {
+    expect(machine.currentContext).toEqual({ currentSong: "", countStops: 0 });
+  });
+
   it("'countStops' should be updated when 'onExit' is called", () => {
     expect(machine.currentContext.countStops).toEqual(0);
 

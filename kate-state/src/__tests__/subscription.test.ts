@@ -66,4 +66,17 @@ describe("machine with subscription", () => {
 
     expect(listener).not.toHaveBeenCalled();
   });
+
+  it("should call listeners with error when an invalid event is sent", () => {
+    const mockListener = jest.fn();
+    machine.subscribe(mockListener);
+
+    machine.send("INVALID_EVENT");
+
+    expect(mockListener).toHaveBeenCalledWith(
+      "idle",
+      expect.anything(),
+      "Invalid event: INVALID_EVENT for state: idle"
+    );
+  });
 });
