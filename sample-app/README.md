@@ -12,7 +12,6 @@ The application is structured as follows:
 - `machines`: Contains the definitions of the state machines used in the application.
 - `mocks`: Contains mock handlers and workers for testing.
 - `services`: Contains services used in the application, such as API calls.
-- `store.ts`: The Redux store of the application.
 - `themes`: Contains the theme and styling information for the application.
 - `types`: Contains TypeScript type definitions.
 - `ui-components`: Contains reusable UI components.

@@ -3,6 +3,7 @@ import { createMachine } from "kate-state";
 export enum UserFlowEvent {
   START_CLICK = "START_CLICK",
   FINISH = "FINISH",
+  RESTART = "RESTART",
 }
 
 export enum UserFlowState {
@@ -23,6 +24,11 @@ export const userFlowMachine = createMachine({
     [UserFlowState.mainBlock]: {
       on: {
         [UserFlowEvent.FINISH]: UserFlowState.goodbye,
+      },
+    },
+    [UserFlowState.goodbye]: {
+      on: {
+        [UserFlowEvent.RESTART]: UserFlowState.welcome,
       },
     },
   },

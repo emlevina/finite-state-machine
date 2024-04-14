@@ -5,11 +5,11 @@ import Input from "../ui-components/Input";
 import Stack from "../ui-components/Stack";
 
 type Props = {
-  setUserNumber: (number: string) => void;
+  handleAddNumber: (number: string) => void;
   currentState: string;
 };
 
-export default function NumberInput({ setUserNumber, currentState }: Props) {
+export default function NumberInput({ handleAddNumber, currentState }: Props) {
   const [input, setInput] = useState("");
   const [helperText, setHelperText] = useState("");
   const buttonState =
@@ -24,7 +24,7 @@ export default function NumberInput({ setUserNumber, currentState }: Props) {
     if (buttonState === "disabled") {
       return;
     }
-    setUserNumber(input);
+    handleAddNumber(input)
     setInput("");
   };
 
