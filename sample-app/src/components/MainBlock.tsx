@@ -1,50 +1,33 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMachine } from "../hooks/useMachine";
 import {
   FetchMachineEvents,
   FetchMachineStates,
   fetchMachine,
 } from "../machines/fetchMachine";
-import { useGetNumberQuery } from "../services/numberFact";
+import { getNumberRapid } from "../services/numberFact";
 import Box from "../ui-components/Box";
 import Stack from "../ui-components/Stack";
 import Fact from "./Fact";
 import NumberInput from "./NumberInput";
 
 export default function MainBlock() {
+  const [factAboutNumber, setFactAboutNumber] = useState("");
   const [userNumber, setUserNumber] = useState("");
   const { send, currentState } = useMachine(fetchMachine);
-  const {
-    data: factAboutNumber,
-    error,
-    isLoading,
-  } = useGetNumberQuery(userNumber, { skip: !userNumber });
 
-  useEffect(() => {
-    if (userNumber && currentState === FetchMachineStates.error) {
-      send(FetchMachineEvents.RETRY);
-    } else if (userNumber) {
-      send(FetchMachineEvents.FETCH);
-    }
-  }, [userNumber]);
-
-  useEffect(() => {
-    if (
-      factAboutNumber &&
-      currentState === FetchMachineStates.loading &&
-      !isLoading
-    ) {
-      new Promise((resolve) => setTimeout(resolve, 5000)).then(() =>
-        send(FetchMachineEvents.RESOLVE)
-      );
-    }
-  }, [factAboutNumber, currentState, isLoading]);
-
-  useEffect(() => {
-    if (error) {
-      send(FetchMachineEvents.REJECT);
-    }
-  }, [error]);
+  const handleAddNumber = (number: string) => {
+    setUserNumber(number);
+    send(FetchMachineEvents.FETCH);
+    getNumberRapid(number)
+      .then((fact) => {
+        setFactAboutNumber(fact);
+        send(FetchMachineEvents.RESOLVE);
+      })
+      .catch(() => {
+        send(FetchMachineEvents.REJECT);
+      });
+  };
 
   return (
     <Stack alignItems={{ mobile: "stretch", tablet: "center" }} width={400}>
@@ -68,7 +51,10 @@ export default function MainBlock() {
           </h5>
         )}
       </Box>
-      <NumberInput setUserNumber={setUserNumber} currentState={currentState} />
+      <NumberInput
+        handleAddNumber={handleAddNumber}
+        currentState={currentState}
+      />
     </Stack>
   );
 }

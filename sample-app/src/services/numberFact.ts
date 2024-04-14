@@ -1,25 +1,27 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
 const apiKey = process.env.REACT_APP_RAPID_API_KEY!;
 
-export const numberFactApi = createApi({
-  reducerPath: "numberFactApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "https://numbersapi.p.rapidapi.com",
-    prepareHeaders: (headers) => {
-      headers.set("X-RapidAPI-Key", apiKey);
-      headers.set("X-RapidAPI-Host", "numbersapi.p.rapidapi.com");
-      return headers;
-    },
-  }),
-  endpoints: (builder) => ({
-    getNumber: builder.query({
-      query: (number) => ({
-        url: `${number}/trivia`,
-        responseHandler: (response) => response.text(),
-      }),
-    }),
-  }),
-});
+export const getNumberRapid = async (number: string) => {
+  const response = await fetch(
+    `https://numbersapi.p.rapidapi.com/${number}/trivia`,
+    {
+      headers: {
+        "X-RapidAPI-Key": apiKey,
+        "X-RapidAPI-Host": "numbersapi.p.rapidapi.com",
+      },
+    }
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const data = await response.text();
+  return data;
+};
 
-export const { useGetNumberQuery } = numberFactApi;
+export const getNumber = async (number: string) => {
+  const response = await fetch(`http://localhost:3001/api/facts/${number}`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  const data = await response.json();
+  return data.fact;
+};

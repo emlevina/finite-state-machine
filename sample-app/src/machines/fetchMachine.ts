@@ -10,7 +10,6 @@ export enum FetchMachineEvents {
   FETCH = "FETCH",
   RESOLVE = "RESOLVE",
   REJECT = "REJECT",
-  RETRY = "RETRY",
 }
 
 export const fetchMachine = createMachine({
@@ -36,7 +35,7 @@ export const fetchMachine = createMachine({
     },
     [FetchMachineStates.error]: {
       on: {
-        [FetchMachineEvents.RETRY]: FetchMachineStates.loading,
+        [FetchMachineEvents.FETCH]: FetchMachineStates.loading,
       },
     },
   },
