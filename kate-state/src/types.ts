@@ -1,29 +1,32 @@
 export type TransitionEvent = string;
 
-interface StateConfig {
+interface StateConfig<T> {
   on: {
     [event in TransitionEvent]?: string;
   };
-  onEntry?: () => void;
-  onExit?: () => void;
+  onEntry?: (context: T, setContext: (newContext: Partial<T>) => void) => void;
+  onExit?: (context: T, setContext: (newContext: Partial<T>) => void) => void;
 }
 
-export interface MachineConfig {
+export interface MachineConfig<T extends object> {
   id?: string;
   initial: string;
   states: {
-    [state: string]: StateConfig;
+    [state: string]: StateConfig<T>;
   };
+  context?: T;
 }
 
-export type Listener = (currentState: string) => void;
+export type Listener<T> = (currentState: string, context: T) => void;
 
-export interface Machine {
+export interface Machine<T extends object> {
   states: {
-    [state: string]: StateConfig;
+    [state: string]: StateConfig<T>;
   };
   send: (event: TransitionEvent) => void;
   initialState: string;
+  initialContext: T;
+  currentContext: T;
   currentState: string;
-  subscribe: (listener: Listener) => () => void;
+  subscribe: (listener: Listener<T>) => () => void;
 }
