@@ -31,9 +31,9 @@ The `kate-state` library is a custom implementation of a finite state machine. I
 
 The sample application, built with React and TypeScript, demonstrates the `kate-state` library usage. It interacts with a public API to fetch and display a fact about a number input by the user. The application showcases finite state machines in handling UI states, asynchronous data fetching, and theme toggling.
 
-### API Integration with RTK Query
+### API Integration
 
-The application uses Redux Toolkit Query for data fetching from the [Numbers API](https://numbersapi.p.rapidapi.com/). The API key is set via headers for secure access.
+The application uses native fetch API for data fetching from the [Numbers API](https://numbersapi.p.rapidapi.com/). The API key is set via headers for secure access.
 
 ### Testing
 

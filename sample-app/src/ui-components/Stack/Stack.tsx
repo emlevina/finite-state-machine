@@ -15,6 +15,7 @@ interface Props {
   gap?: ResponsiveProp<Gap>;
   direction?: ResponsiveProp<Direction>;
   alignItems?: ResponsiveProp<AlignItems>;
+  width?: ResponsiveProp<number>;
   wrap?: boolean;
 }
 
@@ -24,11 +25,13 @@ export default function Stack({
   direction,
   alignItems,
   wrap = false,
+  width,
 }: React.PropsWithChildren<Props>) {
   const { device } = useResponsive();
   const gapValue = getValueForDevice<Gap>(device, gap);
   const directionValue = getValueForDevice<Direction>(device, direction);
   const alignItemsValue = getValueForDevice<AlignItems>(device, alignItems);
+  const widthValue = getValueForDevice<number>(device, width);
 
   return (
     <div
@@ -38,6 +41,7 @@ export default function Stack({
         ...(wrap && { flexWrap: "wrap" }),
         flexDirection: directionValue ?? "column",
         alignItems: alignItemsValue ?? "stretch",
+        width: widthValue ? `${widthValue}px` : "auto",
       }}
     >
       {children}

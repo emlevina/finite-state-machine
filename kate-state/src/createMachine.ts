@@ -19,6 +19,11 @@ export default function createMachine<T extends object>(
       currentState = stateConfig.on[event]!;
       states[currentState].onEntry?.(currentContext, setContext);
       listeners.forEach((listener) => listener(currentState, currentContext));
+    } else {
+      const error = `Invalid event: ${event} for state: ${currentState}`;
+      listeners.forEach((listener) =>
+        listener(currentState, currentContext, error)
+      );
     }
   };
 

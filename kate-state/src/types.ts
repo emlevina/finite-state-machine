@@ -1,7 +1,7 @@
 export type TransitionEvent = string;
 
 interface StateConfig<T> {
-  on: {
+  on?: {
     [event in TransitionEvent]?: string;
   };
   onEntry?: (context: T, setContext: (newContext: Partial<T>) => void) => void;
@@ -17,7 +17,11 @@ export interface MachineConfig<T extends object> {
   context?: T;
 }
 
-export type Listener<T> = (currentState: string, context: T) => void;
+export type Listener<T> = (
+  currentState: string,
+  context: T,
+  error?: string
+) => void;
 
 export interface Machine<T extends object> {
   states: {

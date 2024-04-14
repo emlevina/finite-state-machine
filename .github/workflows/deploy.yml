@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "server/**"
 
 jobs:
   build-and-deploy:
