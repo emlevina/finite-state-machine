@@ -3,7 +3,11 @@ import { ThemeEvents, themeMachine } from "../../machines/themeMachine";
 import styles from "./ThemeSwitch.module.scss";
 
 export default function ThemeSwitch() {
-  const { currentState: theme, send } = useMachine(themeMachine);
+  const {
+    currentState: theme,
+    send,
+    currentContext: themeContext,
+  } = useMachine(themeMachine);
   const toggleTheme = () => {
     send(ThemeEvents.TOGGLE);
   };
@@ -16,6 +20,7 @@ export default function ThemeSwitch() {
       <div className={theme === "dark" ? styles.iconActive : styles.icon}>
         🌙
       </div>
+      {themeContext.counter >= 3 && <p>WOW! You do love switching themes!</p>}
     </div>
   );
 }

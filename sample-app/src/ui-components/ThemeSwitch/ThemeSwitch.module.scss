@@ -5,17 +5,19 @@
     inset-inline-start: $theme-switch-padding;
     inset-block-start: $theme-switch-padding;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 
     .icon {
+        position: absolute;
         transition: opacity 0.5s ease;
         opacity: 0;
-        position: absolute;
     }
 
     .iconActive {
         transition: opacity 0.5s ease;
         opacity: 1;
-        position: absolute;
     }
 
 }
