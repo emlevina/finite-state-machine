@@ -47,8 +47,8 @@ export default function MainBlock() {
   }, [error]);
 
   return (
-    <Stack alignItems={{ mobile: "stretch", tablet: "center" }}>
-      <Box height={200} width={400}>
+    <Stack alignItems={{ mobile: "stretch", tablet: "center" }} width={400}>
+      <Box height={300}>
         {currentState === FetchMachineStates.idle && (
           <h5>
             Type a <em>number</em> to get a fact about it

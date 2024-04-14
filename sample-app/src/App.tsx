@@ -9,21 +9,18 @@ import {
 } from "./machines/userFlowMachine";
 
 import Container from "./ui-components/Container";
-import Stack from "./ui-components/Stack";
 
 export default function App() {
   const { send, currentState } = useMachine(userFlowMachine);
 
   return (
     <Container>
-      <Stack gap={2}>
-        {currentState === UserFlowState.welcome && (
-          <Welcome
-            transitionToFactInput={() => send(UserFlowEvent.START_CLICK)}
-          />
-        )}
-        {currentState === UserFlowState.mainBlock && <MainBlock />}
-      </Stack>
+      {currentState === UserFlowState.welcome && (
+        <Welcome
+          transitionToFactInput={() => send(UserFlowEvent.START_CLICK)}
+        />
+      )}
+      {currentState === UserFlowState.mainBlock && <MainBlock />}
     </Container>
   );
 }
