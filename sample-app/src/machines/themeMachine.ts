@@ -31,13 +31,22 @@ export const themeMachine = createMachine({
       on: {
         TOGGLE: ThemeState.Dark,
       },
-      onEntry: () => setTheme(ThemeState.Light),
+      onEntry: (context, setContext) => {
+        setTheme(ThemeState.Light);
+        setContext({ counter: context.counter + 1 });
+      },
     },
     [ThemeState.Dark]: {
       on: {
         TOGGLE: ThemeState.Light,
       },
-      onEntry: () => setTheme(ThemeState.Dark),
+      onEntry: (context, setContext) => {
+        setTheme(ThemeState.Dark);
+        setContext({ counter: context.counter + 1 });
+      },
     },
+  },
+  context: {
+    counter: 0,
   },
 });
