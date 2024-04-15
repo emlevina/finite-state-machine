@@ -13,7 +13,7 @@ app.use(
   cors({
     origin: function (origin, callback) {
       console.log("Origin: ", origin);
-      if (origin === process.env.CLIENT_URL || "http://localhost:3001") {
+      if (origin === process.env.CLIENT_URL) {
         callback(null, true);
       } else {
         callback(new Error("Not allowed by CORS"));
