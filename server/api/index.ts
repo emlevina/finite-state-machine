@@ -3,12 +3,24 @@ import cors from "cors";
 import express from "express";
 import factsRouter from "./routers/facts";
 import connectDB from "./db/connect";
+import dotenv from "dotenv";
 
-require("dotenv").config();
+dotenv.config();
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      console.log("Origin: ", origin);
+      if (origin === process.env.CLIENT_URL) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/api/facts", factsRouter);
