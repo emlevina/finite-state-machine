@@ -11,7 +11,7 @@ export const handlers = [
     }
     return HttpResponse.text("This number is very very special");
   }),
-  http.get("http://localhost:3001/api/facts/:number", ({ params }) => {
+  http.get("http://localhost:3000/api/facts/:number", ({ params }) => {
     const { number } = params;
     if (number === "42") {
       return HttpResponse.error();

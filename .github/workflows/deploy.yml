@@ -44,6 +44,7 @@ jobs:
         run: |
           echo "NODE_ENV=production" >> $GITHUB_ENV
           echo "REACT_APP_RAPID_API_KEY=${{ secrets.REACT_APP_RAPID_API_KEY }}" >> $GITHUB_ENV
+          echo "REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }}" >> $GITHUB_ENV
 
       - name: Build sample-app
         run: cd sample-app && npm run build
