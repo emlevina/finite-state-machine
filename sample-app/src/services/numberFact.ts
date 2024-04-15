@@ -1,5 +1,5 @@
 const apiKey = process.env.REACT_APP_RAPID_API_KEY!;
-const localApiUrl = process.env.REACT_APP_API_URL
+const localApiUrl = process.env.REACT_APP_API_URL;
 
 const getNumberRapid = async (number: string) => {
   const response = await fetch(
@@ -27,6 +27,6 @@ const getNumberLocal = async (number: string) => {
   return data.fact;
 };
 
-export const getNumber = !!localApiUrl
-  ? getNumberLocal
-  : getNumberRapid;
+console.log("localApiUrl", localApiUrl);
+
+export const getNumber = !!localApiUrl ? getNumberLocal : getNumberRapid;
