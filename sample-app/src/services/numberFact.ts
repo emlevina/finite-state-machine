@@ -1,4 +1,5 @@
 const apiKey = process.env.REACT_APP_RAPID_API_KEY!;
+const localApiUrl = process.env.REACT_APP_API_URL
 
 const getNumberRapid = async (number: string) => {
   const response = await fetch(
@@ -18,7 +19,7 @@ const getNumberRapid = async (number: string) => {
 };
 
 const getNumberLocal = async (number: string) => {
-  const response = await fetch(`http://localhost:3001/api/facts/${number}`);
+  const response = await fetch(`${localApiUrl}/api/facts/${number}`);
   if (!response.ok) {
     throw new Error("Failed to fetch data");
   }
@@ -26,7 +27,6 @@ const getNumberLocal = async (number: string) => {
   return data.fact;
 };
 
-export const getNumber =
-  process.env.REACT_APP_USE_LOCAL_API === "true"
-    ? getNumberLocal
-    : getNumberRapid;
+export const getNumber = !!localApiUrl
+  ? getNumberLocal
+  : getNumberRapid;
