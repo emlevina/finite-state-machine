@@ -1,8 +1,9 @@
-const express = require("express");
-const { createFact, getFact } = require("../controllers/facts");
-const router = express.Router();
+import express from "express";
+import { createFact, getFact } from "../controllers/facts.js";
 
-router.post("/", createFact);
-router.get("/:number", getFact);
+const factsRouter = express.Router();
 
-module.exports = router;
+factsRouter.post("/", createFact);
+factsRouter.get("/:number", getFact);
+
+export { factsRouter };

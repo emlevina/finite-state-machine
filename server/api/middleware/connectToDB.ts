@@ -1,8 +1,11 @@
-import { VercelRequest, VercelResponse } from "@vercel/node";
-import connectDB from "../db/connect";
-import { NextFunction } from "express";
+import { NextFunction, Response, Request } from "express";
+import connectDB from "../db/connect.js";
 
-const connectToDB = async (req: VercelRequest, res: VercelResponse, next: NextFunction) => {
+export const connectToDB = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     await connectDB(process.env.MONGO_URI!);
     console.log(`Connected to Mongo Cluster`);
@@ -12,5 +15,3 @@ const connectToDB = async (req: VercelRequest, res: VercelResponse, next: NextFu
     res.status(500).send("An error occurred");
   }
 };
-
-module.exports = { connectToDB };
