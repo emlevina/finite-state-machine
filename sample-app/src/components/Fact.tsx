@@ -1,4 +1,3 @@
-import Box from "../ui-components/Box";
 import Stack from "../ui-components/Stack";
 import ChosenNumber from "./ChosenNumber";
 

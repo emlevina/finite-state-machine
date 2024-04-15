@@ -24,7 +24,7 @@ export default function NumberInput({ handleAddNumber, currentState }: Props) {
     if (buttonState === "disabled") {
       return;
     }
-    handleAddNumber(input)
+    handleAddNumber(input);
     setInput("");
   };
 
@@ -38,7 +38,7 @@ export default function NumberInput({ handleAddNumber, currentState }: Props) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} role="form">
       <Stack
         direction={{ mobile: "column", tablet: "row" }}
         alignItems={{
