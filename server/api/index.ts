@@ -1,9 +1,9 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
-import express from 'express';
-import cors from 'cors';
-import factsRouter from './routers/facts';
-import connectDB from './db/connect';
-import dotenv from 'dotenv';
+import { VercelRequest, VercelResponse } from "@vercel/node";
+import express from "express";
+import cors from "cors";
+import factsRouter from "./routers/facts";
+import connectDB from "./db/connect";
+import dotenv from "dotenv";
 
 dotenv.config();
 const app = express();
@@ -22,7 +22,7 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use('/api/facts', factsRouter);
+app.use("/facts", factsRouter);
 
 const start = async () => {
   try {
