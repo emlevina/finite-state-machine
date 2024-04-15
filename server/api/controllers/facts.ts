@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Fact from "../models/Fact";
+import Fact from "../models/Fact.js";
 
 export const createFact = async (req: Request, res: Response) => {
   try {

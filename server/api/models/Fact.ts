@@ -1,6 +1,11 @@
-const mongoose = require("mongoose");
+import mongoose, { Schema, Document } from "mongoose";
 
-const FactSchema = new mongoose.Schema({
+interface IFact extends Document {
+  fact: string;
+  number: number;
+}
+
+const FactSchema: Schema = new Schema({
   fact: {
     type: String,
     required: [true, "Please provide a fact"],
@@ -12,4 +17,5 @@ const FactSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Fact", FactSchema);
+const Fact = mongoose.model<IFact>("Fact", FactSchema);
+export default Fact;
