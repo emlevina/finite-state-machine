@@ -27,6 +27,6 @@ const getNumberLocal = async (number: string) => {
   return data.fact;
 };
 
-console.log("localApiUrl", localApiUrl);
+console.log("localApiUrl1", localApiUrl);
 
 export const getNumber = !!localApiUrl ? getNumberLocal : getNumberRapid;

@@ -47,7 +47,7 @@ jobs:
           echo "REACT_APP_API_URL=https://finite-state-machine.vercel.app" >> $GITHUB_ENV
 
       - name: Build sample-app
-        run: cd sample-app && npm run build
+        run: cd sample-app && REACT_APP_API_URL=https://finite-state-machine.vercel.app npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
