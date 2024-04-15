@@ -1,5 +1,5 @@
 const apiKey = process.env.REACT_APP_RAPID_API_KEY!;
-const localApiUrl = process.env.REACT_APP_API_URL;
+const localApiUrl = "https://finite-state-machine.vercel.app";
 
 const getNumberRapid = async (number: string) => {
   const response = await fetch(
@@ -26,7 +26,5 @@ const getNumberLocal = async (number: string) => {
   const data = await response.json();
   return data.fact;
 };
-
-console.log("localApiUrl1", localApiUrl);
 
 export const getNumber = !!localApiUrl ? getNumberLocal : getNumberRapid;
