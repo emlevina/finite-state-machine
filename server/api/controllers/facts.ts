@@ -14,6 +14,7 @@ export const createFact = async (req: Request, res: Response) => {
 export const getFact = async (req: Request, res: Response) => {
   try {
     const fact = await Fact.findOne({ number: req.params.number });
+    console.log(fact);
     const factToSend = fact ? fact.fact : "Fact not found";
     res.status(201).json({ fact: factToSend });
   } catch (error) {

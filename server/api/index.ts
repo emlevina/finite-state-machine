@@ -1,40 +1,23 @@
-import { VercelRequest, VercelResponse } from "@vercel/node";
-import express from "express";
-import cors from "cors";
-import factsRouter from "./routers/facts";
-import connectDB from "./db/connect";
-import dotenv from "dotenv";
+const dotenv = require("dotenv");
+const express = require("express");
+const app = express();
+const cors = require("cors");
+const factsRouter = require("./routers/facts");
+const bodyParser = require("body-parser");
+const path = require("path");
+const { connectToDB } = require("./middleware/connectToDB");
 
 dotenv.config();
-const app = express();
+
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      console.log("Origin: ", origin);
-      if (origin === process.env.CLIENT_URL) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: process.env.CLIENT_URL,
+    credentials: true,
   })
 );
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use("/facts", factsRouter);
+app.use(connectToDB);
+app.use("/api/facts", factsRouter);
 
-const start = async () => {
-  try {
-    await connectDB(process.env.MONGO_URI!);
-    console.log(`Connected to Mongo Cluster`);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-start();
-
-export default (req: VercelRequest, res: VercelResponse) => {
-  return app(req, res);
-};
+module.exports = app;

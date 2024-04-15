@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const FactSchema = new mongoose.Schema({
   fact: {
@@ -12,4 +12,4 @@ const FactSchema = new mongoose.Schema({
   },
 });
 
-export default mongoose.model("Fact", FactSchema);
+module.exports = mongoose.model("Fact", FactSchema);
