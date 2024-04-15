@@ -1,4 +1,4 @@
-import { createMachine } from "kate-state";
+import { userFlowMachine } from "./userFlowMachine";
 
 export enum FetchMachineStates {
   idle = "idle",
@@ -12,7 +12,7 @@ export enum FetchMachineEvents {
   REJECT = "REJECT",
 }
 
-export const fetchMachine = createMachine({
+export const fetchMachine = userFlowMachine.createChildMachine({
   id: "fetchMachine",
   initial: FetchMachineStates.idle,
   states: {
