@@ -33,4 +33,9 @@ export interface Machine<T extends object> {
   currentContext: T;
   currentState: string;
   subscribe: (listener: Listener<T>) => () => void;
+  createChildMachine: <T extends object>(
+    config: MachineConfig<T>
+  ) => Machine<T>;
+  sendToParent?: (event: TransitionEvent) => void;
+  reset: () => void;
 }

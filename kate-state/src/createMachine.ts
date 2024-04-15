@@ -27,6 +27,24 @@ export default function createMachine<T extends object>(
     }
   };
 
+  const reset = () => {
+    currentState = initial;
+    currentContext = context;
+    listeners.forEach((listener) => listener(currentState, currentContext));
+  };
+  // TODO: Add tests
+  const createChildMachine = <T extends object>(
+    config: MachineConfig<T>
+  ): Machine<T> => {
+    const childMachine = createMachine(config);
+    return {
+      ...childMachine,
+      sendToParent: (event: TransitionEvent) => {
+        transitionToState(event);
+      },
+    };
+  };
+
   return {
     states,
     initialState: initial,
@@ -44,5 +62,7 @@ export default function createMachine<T extends object>(
         listeners = listeners.filter((l) => l !== listener);
       };
     },
+    createChildMachine,
+    reset,
   };
 }
