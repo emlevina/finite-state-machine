@@ -23,8 +23,6 @@
             var theme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
-            var metaThemeColor = document.querySelector("meta[name='theme-color']");
-            metaThemeColor.setAttribute('content', theme === 'dark' ? '#000' : '#fff');
             document.body.style.backgroundColor = theme === 'dark' ? '#000' : '#fff';
         })();
     </script>

@@ -20,8 +20,6 @@ const setTheme = (theme: ThemeState) => {
     document.documentElement
   ).getPropertyValue("--background-color");
   document.body.style.backgroundColor = themeColor;
-  const metaThemeColor = document.querySelector("meta[name='theme-color']");
-  metaThemeColor?.setAttribute("content", themeColor);
   window.localStorage.setItem("theme", theme);
 };
 
