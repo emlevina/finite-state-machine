@@ -1,13 +1,12 @@
-import http from "http";
-import cors from "cors";
-import express from "express";
-import factsRouter from "./routers/facts";
-import connectDB from "./db/connect";
-import dotenv from "dotenv";
+import { VercelRequest, VercelResponse } from '@vercel/node';
+import express from 'express';
+import cors from 'cors';
+import factsRouter from './routers/facts';
+import connectDB from './db/connect';
+import dotenv from 'dotenv';
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 3001;
 
 app.use(
   cors({
@@ -23,20 +22,19 @@ app.use(
 );
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use("/api/facts", factsRouter);
-
-const server = http.createServer(app);
+app.use('/api/facts', factsRouter);
 
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI!);
     console.log(`Connected to Mongo Cluster`);
-    server.listen(port, () => {
-      console.log(`Server runs on ${port}`);
-    });
   } catch (error) {
     console.log(error);
   }
 };
 
 start();
+
+export default (req: VercelRequest, res: VercelResponse) => {
+  return app(req, res);
+};
