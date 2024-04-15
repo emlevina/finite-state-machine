@@ -21,9 +21,7 @@ export default function App() {
           transitionToFactInput={() => send(UserFlowEvent.START_CLICK)}
         />
       )}
-      {currentState === UserFlowState.mainBlock && (
-        <MainBlock transitionToGoodbye={() => send(UserFlowEvent.FINISH)} />
-      )}
+      {currentState === UserFlowState.mainBlock && <MainBlock />}
       {currentState === UserFlowState.goodbye && (
         <Goodbye transitionToWelcomeInput={() => send(UserFlowEvent.RESTART)} />
       )}

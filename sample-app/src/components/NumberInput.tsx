@@ -33,6 +33,9 @@ export default function NumberInput({ handleAddNumber, currentState }: Props) {
     if (!regex.test(e.target.value)) {
       return setHelperText("Please enter a valid number");
     }
+    if (e.target.value.length > 7) {
+      return setHelperText("Input should be less than 8 digits");
+    }
     setHelperText("");
     setInput(e.target.value);
   };

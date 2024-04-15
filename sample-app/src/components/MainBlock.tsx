@@ -5,17 +5,14 @@ import {
   FetchMachineStates,
   fetchMachine,
 } from "../machines/fetchMachine";
+import { UserFlowEvent } from "../machines/userFlowMachine";
 import { getNumber } from "../services/numberFact";
 import Box from "../ui-components/Box";
 import Stack from "../ui-components/Stack";
 import Fact from "./Fact";
 import NumberInput from "./NumberInput";
 
-type Props = {
-  transitionToGoodbye: () => void;
-};
-
-export default function MainBlock({ transitionToGoodbye }: Props) {
+export default function MainBlock() {
   const [factAboutNumber, setFactAboutNumber] = useState("");
   const [userNumber, setUserNumber] = useState("");
   const { send, currentState, currentContext } = useMachine(fetchMachine);
@@ -35,9 +32,10 @@ export default function MainBlock({ transitionToGoodbye }: Props) {
   };
 
   useEffect(() => {
-    if (currentContext.successCount > 4) {
+    if (currentContext.successCount > 1) {
       setTimeout(() => {
-        transitionToGoodbye();
+        fetchMachine.sendToParent?.(UserFlowEvent.FINISH);
+        fetchMachine.reset();
       }, 5000);
     }
   }, [currentContext]);
