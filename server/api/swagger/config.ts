@@ -9,7 +9,7 @@ const swaggerOptions = {
       description: "A simple Express API",
     },
   },
-  apis: ["**/*.yaml"],
+  apis: ["api/**/*.yaml"],
 };
 
 export const swaggerDocs = swaggerJsDoc(swaggerOptions);

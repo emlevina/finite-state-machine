@@ -1,7 +1,9 @@
 {
   "version": 2,
-  "rewrites": [
-    { "source": "/api/swagger", "destination": "/api/swagger" },
-    { "source": "/(.*)", "destination": "/api" }
-  ]
+  "rewrites": [{ "source": "/(.*)", "destination": "/api" }],
+  "functions": {
+    "api/**/*.{js,ts}": {
+      "includeFiles": "api/**/*.yaml"
+    }
+  }
 }
