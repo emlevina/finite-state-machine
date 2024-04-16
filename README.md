@@ -33,7 +33,7 @@ The sample application, built with React and TypeScript, demonstrates the `kate-
 
 ### API Integration
 
-The application uses native fetch API for data fetching from the [Numbers API](https://numbersapi.p.rapidapi.com/). The API key is set via headers for secure access.
+The application uses native fetch API for data fetching from [my own API](./server/README.md). The API is a simple Express server that returns a fact about a number input by the user. The server is hosted on vercel and can be accessed [here](https://finite-state-machine.vercel.app/api/facts/42).
 
 ### Testing
 
