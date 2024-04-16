@@ -1,6 +1,6 @@
 # Finite State Machine by Ekaterina
 
-This is a React TypeScript project demonstrating the use cases of finite state machines in frontend development. The project consists of two main parts: the `kate-state` library and a sample application.
+This is a React TypeScript project demonstrating the use cases of finite state machines in frontend development. The project consists of three main parts: the `kate-state` library, a sample React application and an Express server.
 
 ## Description
 
