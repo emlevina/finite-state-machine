@@ -80,9 +80,6 @@ const config = {
     }),
     new Dotenv(),
     new webpack.DefinePlugin({
-      "process.env.REACT_APP_RAPID_API_KEY": JSON.stringify(
-        process.env.REACT_APP_RAPID_API_KEY
-      ),
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
     }),
     new MiniCssExtractPlugin({
