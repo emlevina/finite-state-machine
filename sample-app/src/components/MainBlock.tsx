@@ -14,19 +14,23 @@ import NumberInput from "./NumberInput";
 
 export default function MainBlock() {
   const [factAboutNumber, setFactAboutNumber] = useState("");
+  const [error, setError] = useState("");
   const [userNumber, setUserNumber] = useState("");
   const { send, currentState, currentContext } = useMachine(fetchMachine);
 
   const handleAddNumber = async (number: string) => {
     setUserNumber(number);
     send(FetchMachineEvents.FETCH);
-    // Simulate a delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
     try {
       const fact = await getNumber(number);
       setFactAboutNumber(fact);
       send(FetchMachineEvents.RESOLVE);
-    } catch (e) {
+    } catch (e: unknown) {
+      if (e instanceof Error) {
+        setError(e.message);
+      } else {
+        setError("No fact found");
+      }
       send(FetchMachineEvents.REJECT);
     }
   };
@@ -57,9 +61,7 @@ export default function MainBlock() {
           <Fact number={userNumber} fact={factAboutNumber} />
         )}
         {currentState === FetchMachineStates.error && (
-          <h5 style={{ color: "var(--text-color-error)" }}>
-            Something went <em>wrong</em>
-          </h5>
+          <Fact number="404" fact={error} isError />
         )}
         {currentState === FetchMachineStates.loading && (
           <h5>
