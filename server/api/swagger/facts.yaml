@@ -1,0 +1,62 @@
+/api/facts:
+  post:
+    description: Create a new fact
+    tags:
+      - Facts
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              number:
+                type: integer
+              fact:
+                type: string
+            required:
+              - number
+              - fact
+    responses:
+      200:
+        description: A fact object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Fact"
+/api/facts/{number}:
+  get:
+    description: Returns a fact
+    tags:
+      - Facts
+    parameters:
+      - name: number
+        in: path
+        required: true
+        schema:
+          type: integer
+    responses:
+      200:
+        description: A fact object
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Fact"
+
+components:
+  schemas:
+    Fact:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: uuid
+          description: The auto-generated id of the fact
+        number:
+          type: integer
+        fact:
+          type: string
+      required:
+        - _id
+        - number
+        - fact
