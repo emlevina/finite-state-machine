@@ -22,6 +22,8 @@
 
         p {
             color: #666;
+            margin: 0;
+            padding: 8px;
         }
 
         a {
@@ -33,12 +35,27 @@
             color: #0056b3;
         }
     </style>
+    <script>
+        window.onload = function () {
+            var link = document.getElementById("api-docs-link");
+
+            var handleClick = function () {
+                setTimeout(function () {
+                    document.getElementById("loading-message").style.visibility = "visible";
+                }, 1000);
+                link.removeEventListener("click", handleClick);
+            };
+
+            link.addEventListener("click", handleClick);
+        };
+    </script>
 </head>
 
 <body>
     <h1>Welcome to facts API!</h1>
-    <p>Get started by exploring our <a href="/api-docs">API documentation</a>.</p>
-    <p>(You may need to wait for a little bit whild the page is generated)</p>
+    <p>Get started by exploring our <a href="/api-docs" id="api-docs-link">API documentation</a>.</p>
+    <p id="loading-message" style="visibility: hidden;">Your documentation should be ready in a moment, if not already!
+    </p>
 </body>
 
 </html>
